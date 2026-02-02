@@ -966,6 +966,9 @@ input:where([type='file']):focus {
 .z-\[2\] {
     z-index: 2;
 }
+.z-40 {
+    z-index: 40;
+}
 .col-span-2 {
     grid-column: span 2 / span 2;
 }
@@ -1085,6 +1088,9 @@ input:where([type='file']):focus {
 .mt-8 {
     margin-top: 2rem;
 }
+.ml-0 {
+    margin-left: 0px;
+}
 .line-clamp-1 {
     overflow: hidden;
     display: -webkit-box;
@@ -1193,6 +1199,9 @@ input:where([type='file']):focus {
 .h-px {
     height: 1px;
 }
+.h-\[80px\] {
+    height: 80px;
+}
 .max-h-0 {
     max-height: 0px;
 }
@@ -1204,6 +1213,9 @@ input:where([type='file']):focus {
 }
 .max-h-full {
     max-height: 100%;
+}
+.max-h-\[50px\] {
+    max-height: 50px;
 }
 .min-h-7 {
     min-height: 1.75rem;
@@ -1268,11 +1280,17 @@ input:where([type='file']):focus {
 .w-full {
     width: 100%;
 }
+.w-auto {
+    width: auto;
+}
 .min-w-0 {
     min-width: 0px;
 }
 .min-w-full {
     min-width: 100%;
+}
+.min-w-\[200px\] {
+    min-width: 200px;
 }
 .max-w-16 {
     max-width: 4rem;
@@ -20013,11 +20031,14 @@ input[type=radio].sr-only:checked ~ div.radio-images__badge {
 }
 /* Main Nav */
 .main-nav-container {
-    min-height: 68px;
+    min-height: 70px;
+    transition-property: all;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 300ms;
 }
 @media (min-width: 1024px) {
     .main-nav-container {
-        min-height: 84px;
+        min-height: 90px;
     }
 }
 .has-bg .main-nav-container, .has-bg .main-nav-container .sub-menu {
@@ -20027,41 +20048,79 @@ input[type=radio].sr-only:checked ~ div.radio-images__badge {
     color: var(--mainnav-text-color);
 }
 .menu-item {
+    position: relative;
     display: flex;
     align-items: center;
-    padding-left: 1.5rem;
-    padding-right: 1.5rem;
-    padding-top: 0.625rem;
-    padding-bottom: 0.625rem;
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
+    font-size: 1rem;
+    line-height: 1.5rem;
+    font-weight: 500;
     --tw-text-opacity: 1;
-    color: rgba(107, 114, 128, 1);
-    color: rgba(107, 114, 128, var(--tw-text-opacity, 1));
-    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
+    color: rgba(75, 85, 99, 1);
+    color: rgba(75, 85, 99, var(--tw-text-opacity, 1));
+    transition-property: all;
     transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
     transition-duration: 300ms;
 }
 .menu-item:hover {
-    background-color: rgba(229, 231, 235, 0.3);
-}
-@media (min-width: 640px) {
-    .menu-item {
-        font-size: 0.875rem;
-        line-height: 1.25rem;
-    }
-}
-.menu-item.logout {
-    --tw-text-opacity: 1;
-    color: rgba(248, 113, 113, 1);
-    color: rgba(248, 113, 113, var(--tw-text-opacity, 1));
-}
-.menu-item.is-active {
-    background-color: rgba(229, 231, 235, 0.2);
     color: #414042;
     color: var(--color-primary);
 }
+.menu-item::after {
+  content: "";
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+  height: 0.125rem;
+  width: 0px;
+  background-color: #414042;
+  background-color: var(--color-primary);
+  opacity: 0;
+  transition-property: all;
+  transition-duration: 300ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+input[type=radio].sr-only div.menu-item::after {
+  transition: all 0.3s;
+}
+input[type=radio].sr-only:checked ~ div.menu-item::after {
+  border-color: var(--color-main);
+}
+.menu-item::after {
+  left: 50%;
+  transform: translateX(-50%);
+}
+.menu-item:hover::after {
+    width: 50%;
+    opacity: 1;
+}
+.menu-item.logout {
+    --tw-text-opacity: 1;
+    color: rgba(239, 68, 68, 1);
+    color: rgba(239, 68, 68, var(--tw-text-opacity, 1));
+}
+.menu-item.logout:hover {
+    --tw-text-opacity: 1;
+    color: rgba(220, 38, 38, 1);
+    color: rgba(220, 38, 38, var(--tw-text-opacity, 1));
+}
+.menu-item.is-active {
+    font-weight: 700;
+    color: #414042;
+    color: var(--color-primary);
+}
+.menu-item.is-active::after {
+    width: 50%;
+    opacity: 1;
+}
 /* Sticky Header */
 .main-nav-container.animated .inner {
-  transition: top 0.5s, transform 0.5s, opacity 0.4s;
+  transition: top 0.5s, transform 0.5s, opacity 0.4s, background-color 0.3s, -webkit-backdrop-filter 0.3s;
+  transition: top 0.5s, transform 0.5s, opacity 0.4s, background-color 0.3s, backdrop-filter 0.3s;
+  transition: top 0.5s, transform 0.5s, opacity 0.4s, background-color 0.3s, backdrop-filter 0.3s, -webkit-backdrop-filter 0.3s;
 }
 .main-nav-container.fixed-pinned .inner {
   position: fixed;
@@ -20069,8 +20128,19 @@ input[type=radio].sr-only:checked ~ div.radio-images__badge {
   right: 0;
   left: 0;
   width: 100%;
-  z-index: 29;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  z-index: 40;
+  border-bottom-width: 1px;
+  border-color: rgba(255, 255, 255, 0.2);
+  background-color: rgba(255, 255, 255, 0.9);
+  --tw-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+  --tw-shadow-colored: 0 10px 15px -3px var(--tw-shadow-color), 0 4px 6px -4px var(--tw-shadow-color);
+  box-shadow: 0 0 rgba(0,0,0,0), 0 0 rgba(0,0,0,0), 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 rgba(0,0,0,0)), var(--tw-ring-shadow, 0 0 rgba(0,0,0,0)), var(--tw-shadow);
+  --tw-backdrop-blur: blur(12px);
+  -webkit-backdrop-filter: blur(12px) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);
+  -webkit-backdrop-filter: var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);
+  backdrop-filter: blur(12px) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);
+  backdrop-filter: var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);
   transform: translate3d(0, -100%, 0);
 }
 @media (max-width: 1024px) {
@@ -20086,8 +20156,8 @@ input[type=radio].sr-only:checked ~ div.radio-images__badge {
   line-height: 1;
 }
 .main-nav-container.fixed-pinned .main-menu > li > a {
-  padding-top: 20px;
-  padding-bottom: 20px;
+  padding-top: 15px;
+  padding-bottom: 15px;
 }
 .main-nav-container.fixed-header .inner {
   transform: translate3d(0, 0, 0);
@@ -24372,6 +24442,11 @@ body.font-dinnextltarabic-regular .btn--add-to-cart {
 .target\:btn:target:hover {
     opacity: 0.8;
 }
+.hover\:bg-gray-50:hover {
+    --tw-bg-opacity: 1;
+    background-color: rgba(249, 250, 251, 1);
+    background-color: rgba(249, 250, 251, var(--tw-bg-opacity, 1));
+}
 .hover\:text-dark:hover {
     --tw-text-opacity: 1;
     color: rgba(29, 31, 31, 1);
@@ -24526,6 +24601,9 @@ body.font-dinnextltarabic-regular .btn--add-to-cart {
     }
     .md\:mt-0 {
         margin-top: 0px;
+    }
+    .md\:block {
+        display: block;
     }
     .md\:flex {
         display: flex;
